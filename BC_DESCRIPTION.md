@@ -20,5 +20,8 @@ github.com/Aiven-Open (klaw @ f1c24b9 / v2.10.6-1)
 ## Impact
 Tenant-local privilege escalation to whatever permission set the custom role holds (full user/team/role admin, cross-team approvals, shutdown, …).
 
+## Relation to the publicly described cross-tenant updateUser issue
+A separate, publicly described Klaw `updateUser` report concerns **cross-tenant** access (missing tenant scoping lets a user edit accounts in another tenant). This report is a **different root cause**: it is entirely **intra-tenant** and concerns *which role's permissions are checked*. `updateUser` evaluates `verifySuperAdminAccess` against `existingUserInfo.getRole()` (the target's current role) instead of `newUser.getRole()` (the role being assigned). Adding tenant scoping does not fix this: a same-tenant caller with only `ADD_EDIT_DELETE_USERS` can still assign a custom elevated role. The fix is independent (check the destination role, as `addNewUser` already does).
+
 ## Fix
 In `updateUser`, also load permissions for `newUser.getRole()` and pass them to `verifySuperAdminAccess` (mirror `addNewUser`).
