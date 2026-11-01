@@ -1,0 +1,7 @@
+repo=https://github.com/Aiven-Open/klaw
+commit=f1c24b9d3c8a079dba0a54e7713a09fdd43a974b
+describe=v2.10.6-1-gf1c24b9
+java=openjdk version "21.0.13" 2026-10-20 LTS
+JAVA_HOME=/workspace/bounty-research/tools/jdk-21.0.13+9
+tested_at=2026-11-02T07:11:48+08:00
+vulnerable_updateUser_sha256=5818d59aad2126caa2cd61b3e3aff957a34e93ffdd195dcead767d73a01d51a3
